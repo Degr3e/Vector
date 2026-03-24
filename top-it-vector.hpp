@@ -36,6 +36,7 @@ namespace topit
   template < class T >
   bool operator==(const Vector< T >& lhs, const Vector< T >& rhs);
 }
+
 template< class T >
 bool topit::operator==(const Vector<T> &lhs, const Vector<T> &rhs)
 {
