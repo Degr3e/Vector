@@ -33,7 +33,17 @@ namespace topit
     T* data_;
     size_t size_, capacity_;
   };
+  template < class T >
+  bool operator==(const Vector< T >& lhs, const Vector< T >& rhs);
 }
+template< class T >
+bool topit::operator==(const Vector<T> &lhs, const Vector<T> &rhs)
+{
+  bool isEqual = lhs.getSize() == rhs.getSize();
+  for(size_t i = 0; (i < lhs.getSize()) && (isEqual = isEqual && lhs[i] == rhs[i]); ++i);
+  return isEqual;
+}
+
 
 template< class T >
 T& topit::Vector< T >::at(size_t id)
