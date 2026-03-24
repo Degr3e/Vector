@@ -1,6 +1,7 @@
 #ifndef TOP_IT_VECTOR_HPP
 #define TOP_IT_VECTOR_HPP
 #include <cstddef>
+#include <stdexcept>
 #include <utility>
 namespace topit
 {
@@ -18,6 +19,11 @@ namespace topit
     size_t getSize() const noexcept;
     size_t getCapacity() const noexcept;
 
+    T& operator[](size_t id) noexcept;
+    const T& operator[](size_t id) const noexcept;
+    T& at(size_t id);
+    const T& at(size_t id) const;
+
     void pushBack(const T&);
     void popBack();
     void insert(size_t, const T&);
@@ -27,6 +33,17 @@ namespace topit
     size_t size_, capacity_;
   };
 }
+
+template< class T >
+T& topit::Vector< T >::at(size_t id)
+{
+  if(id < getSize())
+  {
+    return data_[id];
+  }
+  throw std::range_error("bad id");
+}
+
 template< class T >
 void topit::Vector< T >::pushBack(const T& value)
 {
@@ -68,6 +85,9 @@ void topit::Vector< T >::popBack()
     --size_;
   }
 }
+
+
+
 template< class T >
 topit::Vector< T >::~Vector()
 {
